@@ -1,0 +1,8 @@
+.login-card {
+  min-width: 35vw;
+  max-width: 35vw;
+  min-height: 50vh;
+  max-height: 50vh;
+  margin-top: 10rem !important;
+  background: #fff !important;
+}

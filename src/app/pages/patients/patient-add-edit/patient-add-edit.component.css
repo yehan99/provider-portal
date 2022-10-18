@@ -1,0 +1,23 @@
+.profile-picture {
+  border-radius: 50%;
+  border: 1px solid #1e88e5;
+  margin-left: 35% !important;
+}
+
+.profile-picture-wrapper {
+  position: absolute;
+}
+
+label {
+  position: relative;
+  color: rgb(173, 171, 171);
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 6%;
+  margin-left: -50%;
+}
+
+.save-btn,
+.cancel-btn {
+  float: right;
+}

@@ -1,0 +1,11 @@
+:host ::ng-deep.mat-column-Email {
+  white-space: nowrap;
+  flex: 0 0 10%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-fab-icon {
+  margin-right: 10px;
+  float: right;
+}

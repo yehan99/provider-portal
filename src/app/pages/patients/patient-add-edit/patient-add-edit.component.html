@@ -1,0 +1,183 @@
+<app-toolbar [data]="title"></app-toolbar>
+<mat-card class="cardHeight">
+  <div class="section m-b-1">
+    <mat-list-item class="divider-label">Personal information</mat-list-item>
+    <mat-divider class="w-20"></mat-divider>
+  </div>
+  <form [formGroup]="patientForm">
+    <div class="row">
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Legacy ID</mat-label>
+          <input matInput type="text" formControlName="legacyID">
+          <mat-error *ngIf="patientForm.controls.legacyID.validator">Legacy ID is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Title</mat-label>
+          <mat-select formControlName="title">
+            <mat-option value="mr">Mr.</mat-option>
+            <mat-option value="master">Master</mat-option>
+            <mat-option value="mrs">Mrs.</mat-option>
+            <mat-option value="miss">Miss</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.controls.title.validator">Title is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-3">
+        <div class="profile-picture-wrapper">
+          <input type="file" id="upload" hidden (change)="selectProfilePicture($event)" formControlName="userprofile" />
+          <img class="profile-picture p-1 " [src]="urLink" width="150" type="file">
+          <label class="upload-label" for="upload">Upload
+          </label>
+        </div>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Surname</mat-label>
+          <input matInput type="text" formControlName="surname">
+          <mat-error *ngIf="patientForm.controls.surname.validator">Surname is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput type="text" formControlName="firstName">
+          <mat-error *ngIf="patientForm.controls.firstName.validator">First name is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput type="text" formControlName="lastName">
+          <mat-error *ngIf="patientForm.controls.lastName.validator">Last name is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.controls.gender.validator">Gender is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Date of birth</mat-label>
+          <input matInput [matDatepicker]="dob" formControlName="DOB">
+          <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob></mat-datepicker>
+          <mat-error *ngIf="patientForm.controls.DOB.validator">Date of birth is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-select-country appearance="outline" label="Country" class="className" formControlName="country">
+        </mat-select-country>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Care team</mat-label>
+          <mat-select formControlName="careTeam">
+            <mat-option value="ct1">Care team 1</mat-option>
+            <mat-option value="ct1">FCare team 2</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.controls.careTeam.validator">Care team is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Supervising doctor</mat-label>
+          <mat-select formControlName="superviseDr">
+            <mat-option value="MR">Mohan Rajakaruna</mat-option>
+            <mat-option value="GR">Gotabaya rajapaksha</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.controls.superviseDr.validator">Supervising doctor is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Clinic group</mat-label>
+          <mat-select formControlName="clinicGroup">
+            <mat-option value="G1">Group 1</mat-option>
+            <mat-option value="G2">Group 2</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.controls.clinicGroup.validator">Clinic group is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Prefered language</mat-label>
+          <input matInput type="text" formControlName="language">
+        </mat-form-field>
+      </div>
+
+      <div class=" col-12 section m-b-1">
+        <mat-list-item class="divider-label">Contact details</mat-list-item>
+        <mat-divider class="w-20"></mat-divider>
+      </div>
+
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Country code</mat-label>
+          <input matInput type="text" formControlName="countryCode">
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Phone</mat-label>
+          <input mask="0000 000 000" matInput formControlName="phone">
+          <mat-error *ngIf="patientForm.controls.phone.validator">Phone number is required</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Mobile</mat-label>
+          <input mask="0000 000 000" matInput formControlName="Mobile">
+        </mat-form-field>
+      </div>
+
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="Email">
+          <mat-error *ngIf="patientForm.controls.Email.validator">Email number is required</mat-error>
+          <mat-error *ngIf="patientForm.controls.Email.validator">Incorrect email</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput type="text" formControlName="Address">
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>State</mat-label>
+          <input matInput type="text" formControlName="State">
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Country</mat-label>
+          <input matInput type="text" formControlName="Country">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <button class="save-btn ml-2" style="margin-left: 10px;" mat-raised-button color="primary"
+          [disabled]="patientForm.invalid" (click)="savePatient()">Save</button>
+        <button class="cancel-btn" mat-raised-button>Cancel</button>
+      </div>
+    </div>
+  </form>
+
+</mat-card>

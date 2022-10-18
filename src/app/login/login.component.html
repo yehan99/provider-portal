@@ -1,0 +1,28 @@
+ <mat-card class="login-card m-auto my-auto ">
+   <mat-card-title class="mb-5">
+     <h1>Sign In</h1>
+   </mat-card-title>
+   <form [formGroup]="loginForm" (ngSubmit)="loginUser()" type="">
+     <p>
+       <mat-form-field appearance="outline">
+         <mat-label>Email</mat-label>
+         <input autocomplete="off" formControlName="email" type="email" matInput placeholder="Email">
+       </mat-form-field>
+     </p>
+     <p>
+       <mat-form-field appearance="outline">
+         <mat-label>Password</mat-label>
+         <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
+       </mat-form-field>
+     </p>
+     <div *ngIf="firebaseErrorMessage != ''" class="error-style">
+       <span>{{ firebaseErrorMessage }}</span>
+     </div>
+
+     <button mat-raised-button color="primary">Login</button>
+     <p class="mt-2 ml-2">Don't have an account <a routerLink="/register">Sign Up</a></p>
+   </form>
+
+
+
+ </mat-card>

@@ -1,0 +1,13 @@
+.login-card {
+  min-width: 35vw;
+  max-width: 35vw;
+  min-height: 65vh;
+  max-height: 65vh;
+  margin-top: 5rem !important;
+  background: #fff !important;
+}
+
+.namefield {
+  width: 49%;
+  max-width: 49%;
+}

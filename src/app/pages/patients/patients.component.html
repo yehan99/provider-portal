@@ -1,0 +1,229 @@
+<app-toolbar [data]="title"></app-toolbar>
+<mat-card>
+  <div class="row">
+    <div class="col-3">
+      <mat-form-field class="example-form-field" appearance="outline">
+        <mat-label>Patient ID</mat-label>
+        <input matInput type="text" [formControl]="IDControl">
+        <button *ngIf="IDControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="IDControl.setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint>Search by patient ID</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <mat-form-field class="example-form-field" appearance="outline">
+        <mat-label>Patient name</mat-label>
+        <input matInput type="text" [formControl]="patientName">
+        <button *ngIf="patientName.value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="patientName.setValue('')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint>Search by patient name</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="col-3">
+      <div class="search-panel mt-3">
+        <span class="search-icons" *ngIf="isAdvanceSearchEnable"
+          (click)="isAdvanceSearchEnable = !isAdvanceSearchEnable">
+          <mat-icon matTooltip="Hide">filter_alt</mat-icon>
+        </span>
+        <span class="search-icons" *ngIf="!isAdvanceSearchEnable"
+          (click)="isAdvanceSearchEnable = !isAdvanceSearchEnable">
+          <mat-icon matTooltip="Expand advance filteration">filter_alt</mat-icon>
+        </span>
+        <span class="search-icons" *ngIf="isAdvanceSearchEnable">
+          <mat-icon matTooltip="Search">search</mat-icon>
+        </span>
+        <span class="search-icons" *ngIf="isAdvanceSearchEnable">
+          <mat-icon matTooltip="Remove filters">backspace</mat-icon>
+        </span>
+        <span class="search-icons">
+          <mat-slide-toggle>
+            Urgent
+          </mat-slide-toggle>
+        </span>
+      </div>
+
+    </div>
+    <div class="col-3">
+      <button mat-mini-fab color="primary" class="mini-fab-icon" matTooltip="Print" (click)="exportExcel()">
+        <mat-icon>print</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" class="mini-fab-icon" matTooltip="Add new" (click)="addNew()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div class="advance-filteration" *ngIf="isAdvanceSearchEnable">
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Patient name</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-hint>Search by patient name</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Date of birth</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Contact number</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Registerd date</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Superviving doctor</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-form-field" appearance="outline">
+            <mat-label>Clinical group</mat-label>
+            <input matInput type="text">
+            <button *ngIf="patientName" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>
+<div *ngFor="let item of patientData"></div>
+
+
+<div class="table-container">
+  <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8 "
+    id="ExampleMaterialTable">
+
+    <ng-container matColumnDef="ID">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Patient ID </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.legacyID }}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.firstName }} {{element.lastName}}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="DOB">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date of birth </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.DOB }}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span matTooltip="{{ element.Email }}">
+          {{ element.Email }}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Mobile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Contact number </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.phone }}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span matTooltip="{{ element.Address }}">
+          {{ element.Address }}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Clinic Group">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Clinic group </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.clinicGroup}}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Registered date </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.Date}}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Supervising Doctor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Supervising doctor </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>
+          {{ element.superviseDr}}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/patient-edit{{element.id}}">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="deletePatient(item.id)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10,15,20]" showFirstLastButtons></mat-paginator>
+</div>
